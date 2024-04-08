@@ -17,12 +17,12 @@ export class SchedulesService {
   }
 
   findOne(id: string) {
-    return {
+    return Promise.resolve({
       id,
       account_id: 1,
       agent_id: 1,
       start_time: new Date(),
       end_time: new Date(),
-    };
+    });
   }
 }
