@@ -8,6 +8,7 @@
 
   1. No Pagination provided for collection, ideally should have pagination.
   2. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
+  3. Error handling in specific scenarios for eg. record not available while update.
 
 ## Description
 
