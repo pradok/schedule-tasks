@@ -4,11 +4,13 @@ import { z } from 'zod';
 const c = initContract();
 
 export const ScheduleCreateSchema = z.object({
-  account_id: z.number({ required_error: "Missing Notification ID" }).int(),
+  account_id: z.number({ required_error: 'Missing Notification ID' }).int(),
   agent_id: z.number().int(),
   start_time: z.string().transform((str) => new Date(str)),
   end_time: z.string().transform((str) => new Date(str)),
 });
+
+export const ScheduleUpdateSchema = ScheduleCreateSchema.extend({});
 
 export const ScheduleSchema = z.object({
   id: z.string(),
@@ -52,16 +54,16 @@ export const contract = c.router({
     responses: {
       200: ScheduleSchema,
     },
-    body: ScheduleSchema,
+    body: ScheduleUpdateSchema,
     summary: 'Update a schedule by id',
   },
   deleteSchedule: {
     method: 'DELETE',
     path: '/schedules/:id',
     responses: {
-      204: c.type<{ message: string }>(),
+      200: c.type<{ message: string }>(),
     },
-    body: z.object({}),
+    body: null,
     summary: 'Delete a schedule by id',
   },
 });

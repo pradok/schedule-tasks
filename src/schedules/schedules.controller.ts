@@ -7,6 +7,30 @@ import { Controller, Param } from '@nestjs/common';
 export class SchedulesController {
   constructor(private readonly schedulesService: SchedulesService) {}
 
+  @TsRestHandler(contract.createSchedule)
+  async create() {
+    return tsRestHandler(contract.createSchedule, async ({ body }) => {
+      const schedule = await this.schedulesService.create(body);
+      return { status: 201, body: schedule };
+    });
+  }
+
+  @TsRestHandler(contract.updateSchedule)
+  async update() {
+    return tsRestHandler(contract.updateSchedule, async ({ body, params }) => {
+      const schedule = await this.schedulesService.update(params.id, body);
+      return { status: 200, body: schedule };
+    });
+  }
+
+  @TsRestHandler(contract.deleteSchedule)
+  async delete() {
+    return tsRestHandler(contract.deleteSchedule, async ({ params }) => {
+      await this.schedulesService.delete(params.id);
+      return { status: 204, body: { message: 'Schedule deleted' } };
+    });
+  }
+
   @TsRestHandler(contract.getAllSchedules)
   async findAll() {
     return tsRestHandler(contract.getAllSchedules, async () => {
