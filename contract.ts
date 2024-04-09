@@ -3,9 +3,15 @@ import { z } from 'zod';
 
 const c = initContract();
 
+export const ScheduleCreateSchema = z.object({
+  account_id: z.number({ required_error: "Missing Notification ID" }).int(),
+  agent_id: z.number().int(),
+  start_time: z.string().transform((str) => new Date(str)),
+  end_time: z.string().transform((str) => new Date(str)),
+});
+
 export const ScheduleSchema = z.object({
   id: z.string(),
-  account_id: z.number().int(),
   agent_id: z.number().int(),
   start_time: z.date(),
   end_time: z.date(),
@@ -18,10 +24,7 @@ export const contract = c.router({
     responses: {
       201: ScheduleSchema,
     },
-    body: z.object({
-      account_id: z.string(),
-      agent_id: z.string(),
-    }),
+    body: ScheduleCreateSchema,
     summary: 'Create a schedule',
   },
   getSchedule: {
