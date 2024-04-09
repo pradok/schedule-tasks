@@ -1,5 +1,5 @@
-import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
+import { initContract } from '@ts-rest/core';
 
 const c = initContract();
 
@@ -19,7 +19,7 @@ export const ScheduleSchema = z.object({
   end_time: z.date(),
 });
 
-export const contract = c.router({
+export const scheduleContract = c.router({
   createSchedule: {
     method: 'POST',
     path: '/schedules',
