@@ -10,18 +10,7 @@ export const ScheduleCreateSchema = z.object({
   end_time: z.string().transform((str) => new Date(str)),
 });
 
-export const ScheduleUpdateSchema = z.object({
-  account_id: z.number().int().optional(),
-  agent_id: z.number().int().optional(),
-  start_time: z
-    .string()
-    .transform((str) => new Date(str))
-    .optional(),
-  end_time: z
-    .string()
-    .transform((str) => new Date(str))
-    .optional(),
-});
+export const ScheduleUpdateSchema = ScheduleCreateSchema.partial();
 
 export const ScheduleSchema = z.object({
   id: z.string(),

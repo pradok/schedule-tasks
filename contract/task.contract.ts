@@ -16,16 +16,7 @@ export const TaskCreateSchema = z.object({
   type: z.enum([TaskType.break, TaskType.work]),
 });
 
-export const TaskUpdateSchema = z.object({
-  account_id: z.number().int().optional(),
-  schedule_id: z.string().optional(),
-  start_time: z
-    .string()
-    .transform((str) => new Date(str))
-    .optional(),
-  duration: z.number().int().optional(),
-  type: z.enum([TaskType.break, TaskType.work]).optional(),
-});
+export const TaskUpdateSchema = TaskCreateSchema.partial(); 
 
 export const TaskSchema = TaskCreateSchema.extend({
   id: z.string(),

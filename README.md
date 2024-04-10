@@ -6,10 +6,11 @@
 
 ## Schedule Tasks: Project notes
 
-  1. No Pagination provided for collection, ideally should have pagination.
-  2. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
-  3. Error handling in specific scenarios for eg. record not available while update.
-  4. Intergation test files end with `.i-spec.ts`.
+  1. NestJS has beend used as it has well set patterns for modular code and dependencies.
+  2. No Pagination provided for collection, ideally should have pagination.
+  3. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
+  4. Error handling in specific scenarios for eg. record not available while update.
+  5. Intergation test files end with `.i-spec.ts`.
 
 ## Pending (Due to time constraints)
 

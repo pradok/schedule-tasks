@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ScheduleCreate, ScheduleUpdate } from './model';
+import { ScheduleCreate, ScheduleUpdate } from './dto.types';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
