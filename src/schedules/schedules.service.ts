@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ScheduleCreate } from './model';
+import { ScheduleCreate, ScheduleUpdate } from './model';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class SchedulesService {
     });
   }
 
-  async update(id: string, updateSchedule: ScheduleCreate) {
+  async update(id: string, updateSchedule: ScheduleUpdate) {
     return this.prisma.schedule.update({
       where: { id },
       data: updateSchedule,

@@ -1,7 +1,7 @@
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { SchedulesService } from './schedules.service';
 import { Controller, Param } from '@nestjs/common';
-import { scheduleContract } from 'contract/schedule.contract';
+import { scheduleContract } from '../../contract/schedule.contract';
 
 @Controller()
 export class SchedulesController {

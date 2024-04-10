@@ -3,7 +3,7 @@ import { SchedulesController } from './schedules.controller';
 import { SchedulesService } from './schedules.service';
 import * as request from 'supertest';
 import { INestApplication } from '@nestjs/common';
-import { schedule } from './mocks';
+import { schedule } from './fixtures';
 import { PrismaService } from '../prisma/prisma.service';
 
 describe('SchedulesController', () => {

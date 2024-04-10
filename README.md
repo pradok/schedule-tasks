@@ -10,9 +10,18 @@
   2. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
   3. Error handling in specific scenarios for eg. record not available while update.
 
+## Swagger Docs
+Upon running the app (instructions below), API documentation can be found at http://localhost/api
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Pre-requisites
+
+  1. Dotenv cli
+  2. Docker
+  3. Node version 18 or above
 
 ## Installation
 
@@ -39,22 +48,14 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
+# integration tests
+# dotenv needed for using env.test for integration tests
+$ npm install -g dotenv-cli
+$ npm run test:integration
 
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
