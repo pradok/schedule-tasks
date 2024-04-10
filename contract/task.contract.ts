@@ -2,6 +2,10 @@ import { TaskType } from '@prisma/client';
 import { z } from 'zod';
 import { initContract } from '@ts-rest/core';
 
+import { extendZodWithOpenApi } from '@anatine/zod-openapi';
+
+extendZodWithOpenApi(z);
+
 const c = initContract();
 
 export const TaskCreateSchema = z.object({
@@ -65,6 +69,7 @@ export const taskContract = c.router({
     },
     body: TaskUpdateSchema,
     summary: 'Update a task by id',
+    metadata: { ApiTags: ['Task'] },
   },
   deleteTask: {
     method: 'DELETE',
