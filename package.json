@@ -20,7 +20,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:integration": "dotenv -e .env.test -- jest --config ./jest-integration.json",
     "testdb:migration": "dotenv -e .env.test -- npx prisma migrate deploy",
-    "test:i": "npm run testdb:migration && npm run test:integration"
+    "test:i": "npm run docker:up && npm run testdb:migration && npm run test:integration",
+    "docker:up": "docker-compose up -d db-test",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

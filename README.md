@@ -9,6 +9,12 @@
   1. No Pagination provided for collection, ideally should have pagination.
   2. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
   3. Error handling in specific scenarios for eg. record not available while update.
+  4. Intergation test files end with `.i-spec.ts`.
+
+## Pending (Due to time constraints)
+
+  1. Integration test for Task table (would be similar pattern as for Schedule), only Schedule table is done to demonstrate.
+  
 
 ## Swagger Docs
 Upon running the app (instructions below), API documentation can be found at http://localhost/api
@@ -52,6 +58,9 @@ $ npm run test
 # dotenv needed for using env.test for integration tests
 $ npm install -g dotenv-cli
 $ npm run test:integration
+
+# destroy docker test db container after running integration tests
+$ npm run docker:down
 
 # test coverage
 $ npm run test:cov

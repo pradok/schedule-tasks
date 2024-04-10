@@ -2,9 +2,11 @@
 version: '3.9'
 
 # The containers that compose the project
+volumes:
+  postgres:
 services:
-  db:
-    image: postgres:13
+  db-test:
+    image: postgres:15
     restart: always
     container_name: integration-tests-prisma
     ports:
@@ -13,3 +15,14 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
+
+  postgres:
+    image: postgres:15
+    restart: always
+    container_name: dev-db
+    environment:
+      POSTGRES_USER: prismadev
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: scheduletasks
+    ports:
+      - '5432:5432'
