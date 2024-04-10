@@ -2,6 +2,9 @@ import { Controller } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { taskContract } from '../../contract/task.contract';
+import { PrismaError } from '../prisma/prisma.error';
+import { TaskNotFoundException } from './exceptions/taskNotFound.exception';
+import { Prisma } from '@prisma/client';
 
 @Controller()
 export class TasksController {
@@ -18,16 +21,36 @@ export class TasksController {
   @TsRestHandler(taskContract.updateTask)
   async update() {
     return tsRestHandler(taskContract.updateTask, async ({ body, params }) => {
-      const task = await this.tasksService.update(params.id, body);
-      return { status: 200, body: task };
+      try {
+        const task = await this.tasksService.update(params.id, body);
+        return { status: 200, body: task };
+      } catch (error) {
+        if (
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          error.code === PrismaError.RecordDoesNotExist
+        ) {
+          throw new TaskNotFoundException(params.id);
+        }
+        throw error;
+      }
     });
   }
 
   @TsRestHandler(taskContract.deleteTask)
   async delete() {
     return tsRestHandler(taskContract.deleteTask, async ({ params }) => {
-      await this.tasksService.delete(params.id);
-      return { status: 200, body: { message: 'Task deleted' } };
+      try {
+        await this.tasksService.delete(params.id);
+        return { status: 200, body: { message: 'Task deleted' } };
+      } catch (error) {
+        if (
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          error.code === PrismaError.RecordDoesNotExist
+        ) {
+          throw new TaskNotFoundException(params.id);
+        }
+        throw error;
+      }
     });
   }
 
@@ -44,7 +67,7 @@ export class TasksController {
     return tsRestHandler(taskContract.getTask, async ({ params }) => {
       const task = await this.tasksService.findOne(params.id);
       if (!task) {
-        return { status: 404, body: { message: 'Task not found' } };
+        throw new TaskNotFoundException(params.id);
       }
       return { status: 200, body: task };
     });

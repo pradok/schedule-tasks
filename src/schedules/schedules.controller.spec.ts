@@ -5,6 +5,8 @@ import * as request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { schedule } from './fixtures';
 import { PrismaService } from '../prisma/prisma.service';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { PrismaError } from '../prisma/prisma.error';
 
 describe('SchedulesController', () => {
   let app: INestApplication;
@@ -70,6 +72,56 @@ describe('SchedulesController', () => {
         created_at: expect.any(String),
       });
     });
+    it('should return 404 if schedule not found', async () => {
+      jest.spyOn(schedulesService, 'update').mockImplementation(() => {
+        throw new PrismaClientKnownRequestError('Record does not exist', {
+          code: PrismaError.RecordDoesNotExist as string,
+          clientVersion: '2.20.0',
+        });
+      });
+      const response = await request(app.getHttpServer())
+        .patch('/schedules/34')
+        .send({
+          account_id: 1,
+          agent_id: 1,
+          start_time: '2021-01-01T00:00:00Z',
+          end_time: '2021-01-01T00:00:00Z',
+        });
+      expect(response.status).toBe(404);
+      expect(response.body).toEqual({
+        message: 'Schedule with id 34 not found',
+        error: 'Not Found',
+        statusCode: 404,
+      });
+    });
+  });
+
+  describe('DELETE /schedules/:id', () => {
+    it('should delete a schedule', async () => {
+      jest.spyOn(schedulesService, 'delete').mockResolvedValue(schedule);
+      const response = await request(app.getHttpServer()).delete(
+        '/schedules/33',
+      );
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({ message: 'Schedule deleted' });
+    });
+    it('should return 404 if schedule not found', async () => {
+      jest.spyOn(schedulesService, 'delete').mockImplementation(() => {
+        throw new PrismaClientKnownRequestError('Record does not exist', {
+          code: PrismaError.RecordDoesNotExist as string,
+          clientVersion: '2.20.0',
+        });
+      });
+      const response = await request(app.getHttpServer()).delete(
+        '/schedules/34',
+      );
+      expect(response.status).toBe(404);
+      expect(response.body).toEqual({
+        message: 'Schedule with id 34 not found',
+        error: 'Not Found',
+        statusCode: 404,
+      });
+    });
   });
 
   describe('GET /schedules', () => {
@@ -108,7 +160,11 @@ describe('SchedulesController', () => {
       jest.spyOn(schedulesService, 'findOne').mockResolvedValue(null);
       const response = await request(app.getHttpServer()).get('/schedules/34');
       expect(response.status).toBe(404);
-      expect(response.body).toEqual({ message: 'Schedule not found' });
+      expect(response.body).toEqual({
+        message: 'Schedule with id 34 not found',
+        error: 'Not Found',
+        statusCode: 404,
+      });
     });
   });
 });

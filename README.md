@@ -2,8 +2,6 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
 ## Schedule Tasks: Project notes
 
   1. NestJS has beend used as it has well set patterns for modular code and dependencies.
@@ -12,12 +10,13 @@
   4. Error handling in specific scenarios for eg. record not available while update.
   5. Intergation test files end with `.i-spec.ts`.
 
-## Pending (Due to time constraints)
+## Pending or to improve (Due to time constraints)
 
   1. Integration test for Task table (would be similar pattern as for Schedule), only Schedule table is done to demonstrate.
+  2. Better http response payload for validations instead of throwing Zod error responses.
   
-
 ## Swagger Docs
+
 Upon running the app (instructions below), API documentation can be found at http://localhost/api
 
 ## Description

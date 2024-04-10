@@ -16,7 +16,7 @@ export const TaskCreateSchema = z.object({
   type: z.enum([TaskType.break, TaskType.work]),
 });
 
-export const TaskUpdateSchema = TaskCreateSchema.partial(); 
+export const TaskUpdateSchema = TaskCreateSchema.partial();
 
 export const TaskSchema = TaskCreateSchema.extend({
   id: z.string(),

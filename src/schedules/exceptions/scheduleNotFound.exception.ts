@@ -1,7 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 
 export class ScheduleNotFoundException extends NotFoundException {
-  constructor(postId: number) {
-    super(`Post with id ${postId} not found`);
+  constructor(id: string) {
+    super(`Schedule with id ${id} not found`);
   }
 }

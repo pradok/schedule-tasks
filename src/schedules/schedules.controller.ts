@@ -2,6 +2,9 @@ import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { SchedulesService } from './schedules.service';
 import { Controller, Param } from '@nestjs/common';
 import { scheduleContract } from '../../contract/schedule.contract';
+import { ScheduleNotFoundException } from './exceptions/scheduleNotFound.exception';
+import { Prisma } from '@prisma/client';
+import { PrismaError } from '../prisma/prisma.error';
 
 @Controller()
 export class SchedulesController {
@@ -20,8 +23,18 @@ export class SchedulesController {
     return tsRestHandler(
       scheduleContract.updateSchedule,
       async ({ body, params }) => {
-        const schedule = await this.schedulesService.update(params.id, body);
-        return { status: 200, body: schedule };
+        try {
+          const schedule = await this.schedulesService.update(params.id, body);
+          return { status: 200, body: schedule };
+        } catch (error) {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === PrismaError.RecordDoesNotExist
+          ) {
+            throw new ScheduleNotFoundException(params.id);
+          }
+          throw error;
+        }
       },
     );
   }
@@ -31,8 +44,18 @@ export class SchedulesController {
     return tsRestHandler(
       scheduleContract.deleteSchedule,
       async ({ params }) => {
-        await this.schedulesService.delete(params.id);
-        return { status: 200, body: { message: 'Schedule deleted' } };
+        try {
+          await this.schedulesService.delete(params.id);
+          return { status: 200, body: { message: 'Schedule deleted' } };
+        } catch (error) {
+          if (
+            error instanceof Prisma.PrismaClientKnownRequestError &&
+            error.code === PrismaError.RecordDoesNotExist
+          ) {
+            throw new ScheduleNotFoundException(params.id);
+          }
+          throw error;
+        }
       },
     );
   }
@@ -50,7 +73,7 @@ export class SchedulesController {
     return tsRestHandler(scheduleContract.getSchedule, async () => {
       const schedule = await this.schedulesService.findOne(id);
       if (!schedule) {
-        return { status: 404, body: { message: 'Schedule not found' } };
+        throw new ScheduleNotFoundException(id);
       }
       return { status: 200, body: schedule };
     });
