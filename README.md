@@ -4,20 +4,20 @@
 
 ## Schedule Tasks: Project notes
 
-  1. NestJS has beend used as it has well set patterns for modular code and dependencies.
-  2. No Pagination provided for collection, ideally should have pagination.
-  3. Covered happy path scenarios only, not covered specific failure scenarios which would default to 500 response.
-  4. Error handling in specific scenarios for eg. record not available while update.
-  5. Intergation test files end with `.i-spec.ts`.
+  1. NestJS has been used due to well tried and tested patterns for modular code and dependencies.
+  2. `ts-rest` with Zod is being used for api contract first approach and also used as Controller decorator for validations with Zod.
+  3. Integration test files end with `.i-spec.ts`.
+  4. Thunder collection `thunder-collection_local.json` has been provided in the root project to test api endpoints.
 
 ## Pending or to improve (Due to time constraints)
 
-  1. Integration test for Task table (would be similar pattern as for Schedule), only Schedule table is done to demonstrate.
-  2. Better http response payload for validations instead of throwing Zod error responses.
+  1. Integration test for Task table (would be similar pattern as for Schedule), only Schedule table is done to demonstrate integration test.
+  2. Better http response payload for validations instead of throwing raw Zod error responses.
+  3. No Pagination provided for GET collection, ideally should have pagination.
   
 ## Swagger Docs
 
-Upon running the app (instructions below), API documentation can be found at http://localhost/api
+Upon running the app (instructions as below), API documentation is available at http://localhost/api
 
 ## Description
 
@@ -36,8 +36,16 @@ $ npm install
 ```
 
 ## Running the app
+Run docker and prisma db migration first.
 
 ```bash
+# spins up test and development db containers
+$ docker compose up
+
+# Local db development migration with Prisma.
+# Before migration please rename .env.sample to .env that has local credentials already set via the Docker containers.
+$ npx prisma migrate deploy
+
 # development
 $ npm run start
 
@@ -55,11 +63,11 @@ $ npm run start:prod
 $ npm run test
 
 # integration tests
-# dotenv needed for using env.test for integration tests
+# dotenv needed for using env.test for running integration tests
 $ npm install -g dotenv-cli
-$ npm run test:integration
+$ npm run test:i
 
-# destroy docker test db container after running integration tests
+# destroy docker test and db containers
 $ npm run docker:down
 
 # test coverage

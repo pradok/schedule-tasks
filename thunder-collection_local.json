@@ -1,0 +1,155 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Schedule tasks local",
+    "dateExported": "2024-04-10T15:29:59.856Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ce2397fb-fce4-4fe0-8a2c-db2ba6a1787f",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Task",
+            "url": "http://localhost:3000/tasks/03dd0f42-60d6",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-10T15:28:30.435Z",
+            "modified": "2024-04-10T15:28:30.435Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3946ceea-5b28-47ca-bec2-7daf3e71f7e9",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Schedule ",
+            "url": "http://localhost:3000/schedules/03dd0f42-60d6",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-10T15:28:59.120Z",
+            "modified": "2024-04-10T15:28:59.120Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4085ad4b-3de8-4226-86e7-c844c205cc62",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "DELETE Task",
+            "url": "http://localhost:3000/tasks/ed586314-7b19-442f-bc36-80182704a902",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-04-10T15:29:05.761Z",
+            "modified": "2024-04-10T15:29:05.761Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "512e1e56-aaea-4821-a4f7-1699177b4ac8",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "DELETE Schedule",
+            "url": "http://localhost:3000/schedules/0ced3655-410d-4257-b612-28c55d38ed93",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-04-10T15:29:15.098Z",
+            "modified": "2024-04-10T15:29:15.098Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f8549aea-8e92-4589-8989-9ad0dcbaac3f",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Schedules Tasks",
+            "url": "http://localhost:3000/schedules",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-04-10T15:29:22.504Z",
+            "modified": "2024-04-10T15:29:22.504Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7ca17655-db27-4cb0-989e-5eb86f7063b5",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Schedule",
+            "url": "http://localhost:3000/schedules",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-04-10T15:29:27.505Z",
+            "modified": "2024-04-10T15:29:27.505Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"agent_id\": 2,\n  \"account_id\": 23,\n  \"start_time\": \"2023-04-09T04:41:09.998Z\",\n  \"end_time\": \"2023-04-09T04:41:09.998Z\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "544e8e2d-528b-4c7f-8f76-827e4b0ea1dc",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Task",
+            "url": "http://localhost:3000/tasks",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-04-10T15:29:32.196Z",
+            "modified": "2024-04-10T15:29:32.196Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"schedule_id\": \"0ced3655-410d-4257-b612-28c55d38ed93\",\n  \"account_id\": 23,\n  \"start_time\": \"2023-04-09T04:41:09.998Z\",\n  \"duration\": 3,\n  \"type\": \"break\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "74e1d57d-1689-4586-93a8-a646b23467a6",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Schedules",
+            "url": "http://localhost:3000/schedules/fa04c45b-86d7-44ca-9d8a-88b31d7fe",
+            "method": "PATCH",
+            "sortNum": 80000,
+            "created": "2024-04-10T15:29:38.810Z",
+            "modified": "2024-04-10T15:29:38.810Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"account_id\": 45,\n  \"start_time\": \"2023-04-09T04:41:09.998Z\",\n  \"end_time\": \"2023-04-09T04:41:09.998Z\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "46bad987-0ef9-40aa-ab86-d7011ca8c7d6",
+            "colId": "a57823ca-96a3-4249-b255-cca445d49c9b",
+            "containerId": "",
+            "name": "Task",
+            "url": "http://localhost:3000/tasks/ed586314-7b19-442f-bc36-80182704a902",
+            "method": "PATCH",
+            "sortNum": 90000,
+            "created": "2024-04-10T15:29:45.342Z",
+            "modified": "2024-04-10T15:29:45.342Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"account_id\": 50,\n  \"start_time\": \"2023-04-09T04:41:09.998Z\",\n  \"duration\": 3,\n  \"type\": \"work\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
