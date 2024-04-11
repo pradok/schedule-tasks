@@ -19,9 +19,6 @@
 
 Upon running the app (instructions as below), API documentation is available at http://localhost/api
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Pre-requisites
 
