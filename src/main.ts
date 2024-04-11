@@ -4,18 +4,23 @@ import { generateOpenApi } from '@ts-rest/open-api';
 import { SwaggerModule } from '@nestjs/swagger';
 import { scheduleContract } from 'contract/schedule.contract';
 import { taskContract } from 'contract/task.contract';
+import { initContract } from '@ts-rest/core';
+
+const c = initContract();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const document = generateOpenApi(
-    { ...scheduleContract, ...taskContract },
-    {
-      info: {
-        title: 'Schedules and Tasks API',
-        version: '1.0.0',
-      },
+
+  const contract = c.router({
+    Schedules: scheduleContract,
+    Tasks: taskContract,
+  });
+  const document = generateOpenApi(contract, {
+    info: {
+      title: 'Schedules and Tasks API',
+      version: '1.0.0',
     },
-  );
+  });
 
   SwaggerModule.setup('api', app, document);
 
